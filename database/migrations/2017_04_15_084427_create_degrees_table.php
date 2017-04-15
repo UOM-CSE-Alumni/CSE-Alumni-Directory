@@ -14,9 +14,9 @@ class CreateDegreesTable extends Migration
     public function up()
     {
         Schema::create('degrees', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+//            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('type');
+            $table->enum('type', ['bsc', 'msc','phd']);
             $table->string('batch_name');
             $table->timestamps();
         });

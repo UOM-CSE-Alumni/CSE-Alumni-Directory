@@ -14,10 +14,12 @@ class CreateWorkingInsTable extends Migration
     public function up()
     {
         Schema::create('working_ins', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+//            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('student_id');
-            $table->integer('company_id');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students');
+            $table->integer('company_id')->unsigned();
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->date('from');
             $table->date('to');
             $table->string('profession');

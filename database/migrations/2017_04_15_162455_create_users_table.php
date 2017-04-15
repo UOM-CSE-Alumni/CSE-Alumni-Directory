@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-//            $table->engine = 'InnoDB';
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('contact_no');
-            $table->enum('contact_no_visibility', ['private', 'public']);
-            $table->string('address');
-            $table->enum('address_visibility', ['private', 'public']);
-            $table->string('country');
-            $table->string('city');
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -35,6 +30,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('users');
     }
 }

@@ -14,10 +14,12 @@ class CreateHasDegreesTable extends Migration
     public function up()
     {
         Schema::create('has_degrees', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+//            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('degree_id');
-            $table->integer('student_id');
+            $table->integer('degree_id')->unsigned();
+            $table->foreign('degree_id')->references('id')->on('degrees');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students');
             $table->integer('graduated_year');
             $table->timestamps();
         });
