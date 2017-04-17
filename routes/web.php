@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
+
+Route::get('admin/students/importExport', 'FileController@importExport');
+Route::get('admin/students/downloadExcel/{type}', 'FileController@downloadExcel');
+Route::post('admin/students/importExcel', 'FileController@importExcel');
