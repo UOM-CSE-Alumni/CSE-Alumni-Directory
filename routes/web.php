@@ -19,6 +19,6 @@ Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
 
-Route::get('admin/students/importExport', 'FileController@importExport')->name('import_export');
-Route::get('admin/students/downloadExcel/{type}', 'FileController@downloadExcel')->name('export');
-Route::post('admin/students/importExcel', 'FileController@importExcel')->name('import');
+Route::get('admin/students/importExport', 'FileController@importExportView')->name('import_export');
+Route::get('admin/students/downloadExcel/{type}', 'FileController@exportFile')->name('export');
+Route::post('admin/students/importExcel', 'FileController@importFile')->name('import');

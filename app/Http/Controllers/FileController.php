@@ -15,7 +15,7 @@ class FileController extends Controller
      *
      * @var array
      */
-	public function importExport()
+	public function importExportView()
 	{
 		return view('admin/files/importExport');
 	}
@@ -25,7 +25,7 @@ class FileController extends Controller
      *
      * @var array
      */
-	public function downloadExcel(Request $request, $type)
+	public function exportFile(Request $request, $type)
 	{
 		$data = Student::get()->toArray();
 
@@ -48,7 +48,7 @@ class FileController extends Controller
      *
      * @var array
      */
-	public function importExcel(Request $request)
+	public function importFile(Request $request)
 	{
 		$students = 0;
 		$sheets = 0;
@@ -56,7 +56,7 @@ class FileController extends Controller
 
 		if($request->hasFile('import_file')){
 			$path = $request->file('import_file')->getRealPath();
-
+			//$data will always take sheets since 'force_sheets_collection' is set to true in excel.php
 			$data = Excel::load($path, function($reader) {})->get();
 
 			if(!empty($data) && $data->count()){
@@ -76,6 +76,7 @@ class FileController extends Controller
 							}
 						}
 						catch(\ErrorException $ex){
+							// error message will be truncated to just show only the important part 
 							$errorMsg = "An error occured while reading the file. Check the document's fromat. \n 			Error:" .strtok($ex->getMessage(), '(');
 							//dd($ex->getMessage());
 							return back()->with('error',$errorMsg);
@@ -104,6 +105,7 @@ class FileController extends Controller
 						}
 					}
 					catch(\Illuminate\Database\QueryException $ex){
+						// error message will be truncated to just show only the important part 
 						$errorMsg = "Database Error Occured. Check the uploaded document's data. \n" . 					strtok($ex->getMessage(), '(');
 						//dd($errorMsg);
 						return back()->with('error',$errorMsg);
