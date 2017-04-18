@@ -28,12 +28,19 @@ class FileController extends Controller
 	public function downloadExcel(Request $request, $type)
 	{
 		$data = Student::get()->toArray();
-		return Excel::create('studnets', function($excel) use ($data) {
-			$excel->sheet('student_details', function($sheet) use ($data)
-	        {
-				$sheet->fromArray($data);
-	        });
-		})->download($type);
+
+		if(count($data)){
+			return Excel::create('studnets', function($excel) use ($data) {
+				$excel->sheet('student_details', function($sheet) use ($data)
+		        {
+					$sheet->fromArray($data);
+		        });
+			})->download($type);
+		}
+		else{
+			echo count($data);
+			return back()->with('error','There is no Student details available!');
+		}
 	}
 
 	/**
@@ -43,6 +50,9 @@ class FileController extends Controller
      */
 	public function importExcel(Request $request)
 	{
+		$students = 0;
+		$sheets = 0;
+		$uninserted = [];
 
 		if($request->hasFile('import_file')){
 			$path = $request->file('import_file')->getRealPath();
@@ -51,20 +61,56 @@ class FileController extends Controller
 
 			if(!empty($data) && $data->count()){
 
-				foreach ($data->toArray() as $key => $value) {
-					if(!empty($value)){
-						foreach ($value as $col) {		
-							$insert[] = ['name'=>$col['name'],'email'=>$col['email'],'contact_no'=>$col['contact_no'],'contact_no_visibility'=>$col['contact_no_visibility'],
-										'address'=>$col['address'],'address_visibility'=>$col['address_visibility'],
-										'country'=>$col['country'],'city'=>$col['city']];
+				foreach ($data->toArray() as $sheet) {
+					$sheets = $sheets+1;
+					if(!empty($sheet)){
+						try{
+							foreach ($sheet as $row) {	
+								$students = $students +1 ;
+								//not using array_push for increase efficiency since there can be lot of data	
+								$insert[] = ['name'=>$row['name'],'email'=>$row['email'],'contact_no'=>$row['contact_no'],'contact_no_visibility'=>$row['contact_no_visibility'],
+											'address'=>$row['address'],'address_visibility'=>$row['address_visibility'],
+											'country'=>$row['country'],'city'=>$row['city']];
+								//dump($insert);
+							}
 						}
+						catch(\ErrorException $ex){
+							$errorMsg = "An error occured while reading the file. Check the document's fromat. \n 			Error:" .strtok($ex->getMessage(), '(');
+							//dd($errorMsg);
+							return back()->with('error',$errorMsg);
+						}
+					}
+
+					else{
+						$uninserted[] = $sheets;
 					}
 				}
 
 				
 				if(!empty($insert)){
-					Student::insert($insert);
-					return back()->with('success','Insert Record successfully.');
+					//dd($uninserted);
+					//dd($insert);
+					try{
+						Student::insert($insert);
+						if(!count($uninserted)){					
+							return back()->with('success', $students.'  Student Accounts Created Successfully from '.$sheets. ' sheets in the documnet');
+						}
+						else{
+							$counted = $sheets - count($uninserted); 
+							$skipped = implode(", ",$uninserted);
+							return back()->with('success', $students.'  Student Accounts Created Successfully from '. $counted. ' sheets. '
+								.$skipped. ' Sheets were skipped. Check the Title row or Details in the sheets.');
+						}
+					}
+					catch(\Illuminate\Database\QueryException $ex){
+						$errorMsg = "Database Error Occured. Check the uploaded document's data. \n" . 					strtok($ex->getMessage(), '(');
+						//dd($errorMsg);
+						return back()->with('error',$errorMsg);
+					}
+				}
+
+				else{
+					return back()->with('error','No data found!');
 				}
 
 			}
