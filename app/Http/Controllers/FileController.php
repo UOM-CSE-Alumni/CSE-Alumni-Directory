@@ -27,9 +27,9 @@ class FileController extends Controller
      */
 	public function downloadExcel(Request $request, $type)
 	{
-		$data = Item::get()->toArray();
-		return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
-			$excel->sheet('mySheet', function($sheet) use ($data)
+		$data = Student::get()->toArray();
+		return Excel::create('studnets', function($excel) use ($data) {
+			$excel->sheet('student_details', function($sheet) use ($data)
 	        {
 				$sheet->fromArray($data);
 	        });
@@ -53,15 +53,17 @@ class FileController extends Controller
 
 				foreach ($data->toArray() as $key => $value) {
 					if(!empty($value)){
-						foreach ($value as $v) {		
-							$insert[] = ['title' => $v['title'], 'description' => $v['description']];
+						foreach ($value as $col) {		
+							$insert[] = ['name'=>$col['name'],'email'=>$col['email'],'contact_no'=>$col['contact_no'],'contact_no_visibility'=>$col['contact_no_visibility'],
+										'address'=>$col['address'],'address_visibility'=>$col['address_visibility'],
+										'country'=>$col['country'],'city'=>$col['city']];
 						}
 					}
 				}
 
 				
 				if(!empty($insert)){
-					Item::insert($insert);
+					Student::insert($insert);
 					return back()->with('success','Insert Record successfully.');
 				}
 
