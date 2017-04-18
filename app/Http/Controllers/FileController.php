@@ -60,7 +60,7 @@ class FileController extends Controller
 			$data = Excel::load($path, function($reader) {})->get();
 
 			if(!empty($data) && $data->count()){
-
+				//dd($data->count());
 				foreach ($data->toArray() as $sheet) {
 					$sheets = $sheets+1;
 					if(!empty($sheet)){
@@ -68,7 +68,8 @@ class FileController extends Controller
 							foreach ($sheet as $row) {	
 								$students = $students +1 ;
 								//not using array_push for increase efficiency since there can be lot of data	
-								$insert[] = ['name'=>$row['name'],'email'=>$row['email'],'contact_no'=>$row['contact_no'],'contact_no_visibility'=>$row['contact_no_visibility'],
+								$insert[] = ['name'=>
+									$row['name'],'email'=>$row['email'],'contact_no'=>$row['contact_no'],'contact_no_visibility'=>$row['contact_no_visibility'],
 											'address'=>$row['address'],'address_visibility'=>$row['address_visibility'],
 											'country'=>$row['country'],'city'=>$row['city']];
 								//dump($insert);
@@ -76,7 +77,7 @@ class FileController extends Controller
 						}
 						catch(\ErrorException $ex){
 							$errorMsg = "An error occured while reading the file. Check the document's fromat. \n 			Error:" .strtok($ex->getMessage(), '(');
-							//dd($errorMsg);
+							//dd($ex->getMessage());
 							return back()->with('error',$errorMsg);
 						}
 					}
@@ -93,13 +94,13 @@ class FileController extends Controller
 					try{
 						Student::insert($insert);
 						if(!count($uninserted)){					
-							return back()->with('success', $students.'  Student Accounts Created Successfully from '.$sheets. ' sheets in the documnet');
+							return back()->with('success', $students.'  Student Accounts Created Successfully from '.$sheets. ' sheet(s) in the documnet.');
 						}
 						else{
 							$counted = $sheets - count($uninserted); 
 							$skipped = implode(", ",$uninserted);
-							return back()->with('success', $students.'  Student Accounts Created Successfully from '. $counted. ' sheets. '
-								.$skipped. ' Sheets were skipped. Check the Title row or Details in the sheets.');
+							return back()->with('success', $students.'  Student Accounts Created Successfully from '. $counted. ' sheet(s). '
+								.$skipped. ' Sheet(s) were skipped. Check the Title row or Details in the sheets.');
 						}
 					}
 					catch(\Illuminate\Database\QueryException $ex){
