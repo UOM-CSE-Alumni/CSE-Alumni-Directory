@@ -10,17 +10,11 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="sb-admin/css/bootstrap.min.css" rel="stylesheet">
-
+    {{--<link rel="stylesheet" href="bootstrap/3.3.7/bootstrap.min.css">--}}
+    {{--<link href="font-awesome/3.2.1/bootstrap-combined.no-icons.min.css" rel="stylesheet">--}}
+    <link href="font-awesome/4.7.0/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="sb-admin/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="sb-admin/css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
     @yield('styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,15 +30,14 @@
 <body>
     @yield('content')
 
+
     <!-- jQuery -->
-    <script src="sb-admin/js/jquery.js"></script>
+    <script src="jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="sb-admin/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="bootstrap/3.3.7/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="sb-admin/js/plugins/morris/raphael.min.js"></script>
-    <script src="sb-admin/js/plugins/morris/morris.min.js"></script>
-    <script src="sb-admin/js/plugins/morris/morris-data.js"></script>
+    <!-- Custom JS -->
+    @yield('scripts')
 </body>
 </html>

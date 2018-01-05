@@ -1,3 +1,5 @@
+{{-- TODO: Remove after creating a proper Home page --}}
+
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
     <head>
