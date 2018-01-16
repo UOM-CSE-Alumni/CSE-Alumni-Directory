@@ -24,3 +24,6 @@ Route::get('admin/students/downloadExcel/{type}', 'FileController@exportFile')->
 Route::post('admin/students/importExcel', 'FileController@importFile')->name('import');
 
 Route::get('user/profile/view', 'UserController@getUserProfileView')->name('view_user_profile');
+
+
+Route::get('/home', 'HomeController@index');
