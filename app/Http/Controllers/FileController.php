@@ -75,6 +75,7 @@ class FileController extends Controller
 								$insert[] = ['name'=> $row['name'],'email'=>$row['email'],'contact_no'=>$row['contact_no'],'contact_no_visibility'=>$row['contact_no_visibility'],
 											'address'=>$row['address'],'address_visibility'=>$row['address_visibility'],'country'=>$row['country'],'city'=>$row['city']];
 								$tempPassword = "csealumni" . time();
+								$mails[] = ['name'=> $row['name'],'email'=>$row['email'], 'tempPassword'=>$tempPassword];
 								$users[] = ['name'=> $row['name'],'email'=>$row['email'], 'password'=>bcrypt($tempPassword)];
 								//dump($insert);
 							}
@@ -97,8 +98,8 @@ class FileController extends Controller
 					try{
 						Student::insert($insert);
 						User::insert($users);
-						foreach($insert as $user){
-							Mail::to($user['email'])->queue(new UserCreated());
+						foreach($mails as $mail){
+							Mail::to($mail['email'])->queue(new UserCreated($mail['tempPassword']));
 						}
 						if(!count($uninserted)){					
 							return back()->with('success', $students.'  Student Accounts Created Successfully from '.$sheets. ' sheet(s) in the documnet.');

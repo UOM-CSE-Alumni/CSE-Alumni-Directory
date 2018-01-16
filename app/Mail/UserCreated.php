@@ -16,9 +16,11 @@ class UserCreated extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $tempPassword;
+
+    public function __construct($tempPassword)
     {
-        //
+        $this->tempPassword = $tempPassword;
     }
 
     /**
@@ -29,6 +31,6 @@ class UserCreated extends Mailable
     public function build()
     {
         return $this->from('alumni@cse.com')
-                    ->view('welcome');
+                    ->view('userCreatedMail');
     }
 }
