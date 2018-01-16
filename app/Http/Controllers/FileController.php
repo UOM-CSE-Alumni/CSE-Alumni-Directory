@@ -96,6 +96,7 @@ class FileController extends Controller
 				if(!empty($insert)){
 					try{
 						Student::insert($insert);
+						User::insert($users);
 						foreach($insert as $user){
 							Mail::to($user['email'])->queue(new UserCreated());
 						}
