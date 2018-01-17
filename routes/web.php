@@ -24,7 +24,8 @@ Route::get('admin/students/downloadExcel/{type}', 'FileController@exportFile')->
 Route::post('admin/students/importExcel', 'FileController@importFile')->name('import');
 
 Route::get('search', 'SearchController@index')->name('search');
-Route::post('search', 'SearchController@search')->name('search-result');
+Route::post('search', 'SearchController@simpleSearch')->name('simple-search');
+Route::post('search', 'SearchController@advanceSearch')->name('advance-search');
 
 Auth::routes();
 
