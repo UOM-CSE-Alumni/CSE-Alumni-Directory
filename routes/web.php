@@ -22,6 +22,10 @@ Route::get('/dashboard', function () {
 Route::get('admin/students/importExport', 'FileController@importExportView')->name('import_export');
 Route::get('admin/students/downloadExcel/{type}', 'FileController@exportFile')->name('export');
 Route::post('admin/students/importExcel', 'FileController@importFile')->name('import');
+
+Route::get('search', 'SearchController@index')->name('search');
+Route::post('search', 'SearchController@search')->name('search-result');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

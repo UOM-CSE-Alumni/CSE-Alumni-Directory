@@ -24,10 +24,6 @@ class CreateHasDegreesTable extends Migration
             $table->timestamps();
         });
 
-//        Schema::table('has_degrees', function($table) {
-//            $table->foreign('student_id')->references('id')->on('students');
-//            $table->foreign('degree_id')->references('id')->on('degrees');
-//        });
     }
 
     /**
@@ -38,9 +34,6 @@ class CreateHasDegreesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('has_degrees');
-//        Schema::table('has_degrees', function ($table) {
-//            $table->dropForeign('has_degrees_ student_id_foreign');
-//            $table->dropForeign('has_degrees_ degree_id_foreign');
-//        });
+
     }
 }
