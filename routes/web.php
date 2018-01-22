@@ -14,9 +14,13 @@
 Route::get('/', function () {
     return view('home/index');
 });
-Route::get('/search', function () {
+/*Route::get('/search', function () {
     return view('home/index');
-});
+});*/
+
+Route::get('search', 'SearchController@index')->name('search');
+Route::post('search', 'SearchController@simpleSearch')->name('simple-search');
+Route::post('advance-search', 'SearchController@advanceSearch')->name('advance-search');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index');
