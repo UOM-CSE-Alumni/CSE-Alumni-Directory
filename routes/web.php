@@ -30,4 +30,5 @@ Route::get('admin/students/importExport', 'FileController@importExportView')->na
 Route::get('admin/students/downloadExcel/{type}', 'FileController@exportFile')->name('export');
 Route::post('admin/students/importExcel', 'FileController@importFile')->name('import');
 
+Route::get('user/profile/view', 'UserController@getUserProfileView')->name('view_user_profile');
 

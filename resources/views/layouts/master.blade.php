@@ -10,16 +10,16 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="sb-admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/sb-admin/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="sb-admin/css/sb-admin.css" rel="stylesheet">
+    <link href="/sb-admin/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="sb-admin/css/plugins/morris.css" rel="stylesheet">
+    <link href="/sb-admin/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
