@@ -12,13 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home/index');
+});
+Route::get('/search', function () {
+    return view('home/index');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-});
+
+Auth::routes();
+Route::get('/home', 'HomeController@index');
+Route::get('/dashboard', 'HomeController@dashboard');
 
 Route::get('admin/students/importExport', 'FileController@importExportView')->name('import_export');
 Route::get('admin/students/downloadExcel/{type}', 'FileController@exportFile')->name('export');
 Route::post('admin/students/importExcel', 'FileController@importFile')->name('import');
+
+

@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    Admin Dashboard | CSE Alumni Directory
+    Admin Dashboard | {{ config('app.name', 'Laravel') }}
 @stop
 
 @section('content')
     <div id="wrapper">
 
-        @include('includes.navbar')
+        @include('includes.dashboard-navbar')
 
         <div id="page-wrapper">
 

@@ -231,4 +231,6 @@ return [
 
     ],
 
+    'organization' => env('ORG_NAME', 'Laravel Org.'),
+
 ];
