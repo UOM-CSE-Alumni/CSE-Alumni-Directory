@@ -6,5 +6,5 @@
 
 @section('content')
     @include('includes.home-navbar')
-    @include('home.login-form')
+    @include('includes.search')
 @stop

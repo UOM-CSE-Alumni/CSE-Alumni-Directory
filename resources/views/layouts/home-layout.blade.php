@@ -10,8 +10,8 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
-    {{--<link rel="stylesheet" href="bootstrap/3.3.7/bootstrap.min.css">--}}
-    {{--<link href="font-awesome/3.2.1/bootstrap-combined.no-icons.min.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="bootstrap/3.3.7/bootstrap.min.css">
+    <link href="font-awesome/3.2.1/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="font-awesome/4.7.0/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
