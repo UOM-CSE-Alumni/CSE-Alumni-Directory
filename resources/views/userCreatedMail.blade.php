@@ -81,7 +81,10 @@
                 <div class="title m-b-md">
                     {{--Laravel--}}
                     <strong>CSE Alumni Directory </strong><br>
-                    <small>We Are Under Construction</small>
+                    Your account in CSE Alumni directory has been created successfully. Your temorary password is set to : {{$tempPassword}} . <br/>
+                    Please change the password in your next login. <br/><br/>
+                    Thank you.                    
+
                 </div>
 
                 {{--<div class="links">--}}

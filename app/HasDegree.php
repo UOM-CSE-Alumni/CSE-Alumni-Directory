@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class HasDegree extends Model
 {
-    //
     public function students(){
         return $this->belongsToMany(Student::class);
     }
