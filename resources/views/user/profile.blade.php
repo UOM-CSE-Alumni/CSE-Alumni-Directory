@@ -20,7 +20,7 @@
                             <h1>{{$data["name"]}}</h1>
                         </div>
                         <div class="col-sm-2">
-                            <a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://pbs.twimg.com/profile_images/760746415790264320/PgbN0DBP.jpg"></a>
+                            <a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="/img/usr.jpg"></a>
                         </div>
                     </div>
                     <div class="row">
