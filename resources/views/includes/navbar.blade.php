@@ -93,7 +93,9 @@
             </ul>
         </li>
         <li class="dropdown">
+            @if(Auth::check())
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
+            @endif
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
