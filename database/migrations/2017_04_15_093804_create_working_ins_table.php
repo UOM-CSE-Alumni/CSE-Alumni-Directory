@@ -14,7 +14,7 @@ class CreateWorkingInsTable extends Migration
     public function up()
     {
         Schema::create('working_ins', function (Blueprint $table) {
-//            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students');
@@ -26,10 +26,7 @@ class CreateWorkingInsTable extends Migration
             $table->timestamps();
         });
 //
-//        Schema::table('working_ins', function($table) {
-//            $table->foreign('student_id')->references('id')->on('students');
-//            $table->foreign('company_id')->references('id')->on('companies');
-//        });
+
     }
 
     /**
@@ -40,9 +37,6 @@ class CreateWorkingInsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('working_ins');
-//        Schema::table('working_ins', function ($table) {
-//            $table->dropForeign('working_ins_ student_id_foreign');
-//            $table->dropForeign('working_ins_ company_id_foreign');
-//        });
+
     }
 }
