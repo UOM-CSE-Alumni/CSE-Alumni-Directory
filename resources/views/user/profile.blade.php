@@ -61,9 +61,10 @@
 
                             <ul class="nav nav-tabs" id="myTab">
                                 <li class="active"><a href="#home" data-toggle="tab">Info</a></li>
+                                @if(Auth::id()==$data["id"])
                                 <li><a href="#messages" data-toggle="tab">Messages</a></li>
                                 <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                                
+                                @endif
                             </ul>
 
                             <div class="tab-content">
@@ -135,6 +136,9 @@
 
                                 </div>
                                 <!--/tab-pane-->
+
+                                @if(Auth::id()==$data["id"])
+                                <!--tab-pane-->
                                 <div class="tab-pane" id="messages">
 
                                     <h2></h2>
@@ -151,6 +155,10 @@
 
                                 </div>
                                 <!--/tab-pane-->
+                                @endif
+
+                                @if(Auth::id()==$data["id"])
+                                <!--tab-pane-settings-->
                                 <div class="tab-pane" id="settings">
 
                                     <hr>
@@ -258,10 +266,6 @@
                                                 </select>
                                             </div>
                                         </div>
-
-
-
-
                                         <!-- <div class="form-group">
                                             <div class="col-xs-6">
                                                 <label for="password">
@@ -288,12 +292,11 @@
                                         </div>
 
                                     </form>
-                                </div>
-
-                                
-
+                                </div>                            
                             </div>
                             <!--/tab-pane-->
+                            @endif
+
                         </div>
                         <!--/tab-content-->
 
